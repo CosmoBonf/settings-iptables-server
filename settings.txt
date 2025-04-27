@@ -1,0 +1,42 @@
+______________ firewall - iptables_______________
+##criar um arquivo##
+
+cd /usr/local/bin 
+touch firewall.sh 
+vim firewall.sh 
+
+##script## 
+#!/bin/bash
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+##comandos a seguir##
+ls -l
+chmod +x firewall.sh
+##criar um arquivo##
+
+cd /etc/systemd/system 
+touch firewall.service
+vim firewall.service
+
+##script##
+[Unit]
+Description=Firewall
+
+[Service]
+ExecStart=/usr/local/binfirewall.sh start
+ExecStart=/usr/local/binfirewall.sh stop
+ExecStart=/usr/local/binfirewall.sh restart
+
+[Install]
+Wantedby=multi-user.target
+
+##comando a seguir##
+
+systemctl daemon-reload
+systemctl status firewall 
+systemctl enable firewall 
+systemctl start firewall 
+sudo iptables -L ( o que esta configurado )

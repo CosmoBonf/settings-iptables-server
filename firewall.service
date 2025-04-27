@@ -1,0 +1,10 @@
+[Unit]
+Description=Firewall
+
+[Service]
+ExecStart=/usr/local/binfirewall.sh start
+ExecStart=/usr/local/binfirewall.sh stop
+ExecStart=/usr/local/binfirewall.sh restart
+
+[Install]
+Wantedby=multi-user.target
